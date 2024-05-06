@@ -13,7 +13,7 @@ use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
  
 if(isset($_POST['importSubmit'])){ 
 
-    $kode_transaksi = $_POST['kode_transaksi']; 
+    $kode_transaksi = str_replace(' ','-', $_POST['kode_transaksi']); 
     $tanggal = $_POST['tanggal'];
     $judul = $_POST['judul'];
     // Persiapkan statement SQL dengan placeholder (:placeholders)
@@ -64,13 +64,15 @@ if(isset($_POST['importSubmit'])){
                 $nominal = $row[3]; 
                 $pph = $row[4]; 
                 $diterima = $row[5]; 
+                $kode_akses = $row[6]; 
                 // Persiapkan statement SQL dengan placeholder (:placeholders)
-                    $sql = "INSERT INTO ttd_jasa (kode_transaksi, nik, nama, jabatan, nominal, pph, diterima) VALUES (:kode_transaksi, :nik,
+                    $sql = "INSERT INTO ttd_jasa (kode_transaksi, nik, nama, jabatan, nominal, pph, diterima,kode_akses) VALUES (:kode_transaksi, :nik,
                     :nama, 
                     :jabatan, 
                     :nominal,
                     :pph,
-                    :diterima)";
+                    :diterima,
+                    :kode_akses)";
 
                     // Persiapkan prepared statement
                     $stmt = $pdo->prepare($sql);
@@ -83,6 +85,7 @@ if(isset($_POST['importSubmit'])){
                     $stmt->bindParam(':nominal', $nominal);
                     $stmt->bindParam(':pph', $pph);
                     $stmt->bindParam(':diterima', $diterima);
+                    $stmt->bindParam(':kode_akses', $kode_akses);
 
                     // Eksekusi prepared statement
                     $stmt->execute(); 

@@ -39,21 +39,28 @@
               <?php 
               $kode = isset($_GET['kode']) ? $_GET['kode'] : '';
               $nik = isset($_GET['nik']) ? $_GET['nik'] : '';
+              $kode_akses = isset($_GET['kode_akses']) ? $_GET['kode_akses'] : '';
               if($kode){ 
                 $sql = "SELECT a.*, b.nama as judul FROM ttd_jasa a
                         LEFT JOIN judul b on b.kode_transaksi = a.kode_transaksi 
-                        WHERE a.kode_transaksi = :kode AND a.nik = :nik";
+                        WHERE a.kode_transaksi = :kode AND a.nik = :nik AND a.kode_akses = :kode_akses";
                 $stmt = $pdo->prepare($sql);
 
                 $stmt->execute([':kode' => $kode,
-                                 ':nik' => $nik]);
+                                 ':nik' => $nik,
+                                 ':kode_akses' => $kode_akses
+                                ]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                  if (!$result) {
-                        echo "<center> Data tidak ditemukan ! </center>";
+                        echo "<center> 
+                        <div class='alert alert-danger alert-sm'> Data tidak ditemukan ! <br> Periksa kembali NIP/NRPK dan Password yang anda masukkan !</div></center>
+                        <br>
+                        ";
                     }else{
                         $id = $result['id'];
                          ?>
-                      <div class="col-md-8 col-lg-8">
+                      <div class="col-md-6 col-lg-6">
+                      
                     <div class="card mb-3">
                         <div class="card-header">
                             <h5 class="card-title" align="center"> <?=$result['judul'];?> </h5>
@@ -81,7 +88,7 @@
                         </div>
                       </div>
                       </div>
-                      <div class="col-lg-4">
+                      <div class="col-lg-6">
                     <?php if(!empty($result['ttd'])){ ?>
                         <div class="card mb-3">
                         <div class="card-body" align="center">
@@ -91,33 +98,34 @@
                     <?php }else{ ?>
                     <div class="card shadow-none bg-transparent border border-info mb-3">
                         <div class="card-header"> Silahkan Tanda Tangan : </div>
-                        <div class="card-body" align="center"> <font color="red" class="mb-2"><small> * Usahakan besar tanda tangan sesuai kotak ! </small></font>
+                        <div class="card-body mb-0" align="center"> <font color="red"><small> * Usahakan besar tanda tangan sesuai kotak ! </small></font>
                         <canvas id="signature-pad" class="signature-pad"></canvas>
     
-    
-    <div style="float: right;">
+                    </div>
+                    <div class="card-footer mt-0" align="right" id="proses">
          <button id="btn-submit" class="btn btn-primary btn-sm">
-            Simpan
+            ✅ Simpan 
         </button><!-- tombol undo  -->
         <button type="button" class="btn btn-dark btn-sm" id="undo">
             <span class="fas fa-undo"></span>
-            Undo
+            ↩️ Undo
         </button>
 
         <!-- tombol hapus tanda tangan  -->
         <button type="button" class="btn btn-danger btn-sm" id="clear">
             <span class="fas fa-eraser"></span>
-            Clear
+            ❌ Clear
         </button>
     </div>
-                        </div>
                     </div>
                 <?php 
                     } //end else
                 }
                 } ?>
                 </div>
+               <div> <a href='javascript:window.history.back()' class='btn btn-warning btn-sm'> &laquo; Kembali </a> </div>
                 </div>
+                
                     </div>
                 </div>
         
@@ -177,7 +185,10 @@
             //fungsi untuk menyimpan tanda tangan dengan metode ajax
             $(document).on('click', '#btn-submit', function () {
     var signature = signaturePad.toDataURL();
+    var prosesElement = document.getElementById('proses');
 
+    // Ubah konten elemen menjadi tampilan loading
+    prosesElement.innerHTML = '<div class="spinner-border text-success" role="status"> <span class="visually-hidden">Loading...</span> </div>';
     $.ajax({
         url: "proses.php",
         data: {

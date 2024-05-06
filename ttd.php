@@ -54,13 +54,33 @@
                   </div>
                 <div class="row">
                     <div class="col-lg-8 col-md-8 mx-auto">
+                      <div class="card card-info">
+                        <div class="card-body">
                     <form action="./signature.php" method="GET" class="mb-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="nik" value="<?php echo isset($_GET['nik']) ? $_GET['nik'] : ''; ?>" placeholder="Masukkan NIK Kamu" required>
-                               <input type="hidden" name="kode" value="<?=$kode;?>">
-                                <button type="submit" class="btn btn-primary"><i class="bx bx-search"></i> Cari </button>
+                    <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-fullname">NIP / NRPK</label>
+                          <div class="input-group input-group-merge">
+                            <span id="basic-icon-default-fullname2" class="input-group-text"><i class="bx bx-user"></i></span>
+                            <input type="text" class="form-control" name="nik" value="<?php echo isset($_GET['nik']) ? $_GET['nik'] : ''; ?>" placeholder="NIP / NRPK"  required >
+                          </div>
+                        </div>   
+                        <div class="mb-3">
+                          <label class="form-label" for="basic-icon-default-fullname">KODE AKSES</label>
+                          <div class="input-group input-group-merge">
+                            <span class="input-group-text"><i class="bx bx-key"></i></span>
+                            <input type="text" class="form-control"  name="kode_akses"  placeholder="Kode Akses / Password" autocomplete="off" required >
+                          </div>
+                        </div> 
+                        <div class="mb-3" align="center">
+                        <input type="hidden" name="kode" value="<?=$kode;?>">
+                                <button type="submit" class="btn btn-primary mb-3"><i class="bx bx-search"></i> Cari </button>
+                                <br>
+                        <div class="alert alert-info alert-sm">Jika tidak tahu Kode Akses atau Password, Silahkan hubungi Bagian Keuangan </div>    
                         </div>
                         </form>
+                        
+                      </div>
+                      </div>
                         <div class="row">
                      
                 <?php 
