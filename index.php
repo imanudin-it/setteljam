@@ -1,6 +1,7 @@
 
 <!DOCTYPE html>
 <?php 
+    require_once('./function.php');
     require_once('./db-config.php');
     require_once('./layouts/header.php');
     

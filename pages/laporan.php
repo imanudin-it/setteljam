@@ -68,6 +68,7 @@
                 <thead align="center">
                 <tr align="center">
                     <th width="10"> 📝 </th>
+                    <th> NIP/NRPTT </th>
                     <th> Nama </th>
                     <th> Jabatan </th>
                     <th> Jumlah </th>
@@ -77,9 +78,14 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                <?php
+                // Inisialisasi variabel total
+                $total_nominal = 0.0;
+                $total_pph = 0.0;
+                $total_diterima = 0.0;
+                ?>
                  <?php $no=1; 
-                 foreach ($results as $row) {
+                 foreach ($results as $row) :
                   if(empty($row['ttd']) || $row['ttd']=='-') {
                     $warna = '❌';
                   }else{ $warna = '✔️';
@@ -87,20 +93,40 @@
                     ?>
                   <tr >
                     <td> <?=$warna;?> </td>
+                    <td> <?=$row['nik'];?> </td>
                     <td> <?=$row['nama'];?> </td>
                     <td> <?=$row['jabatan'];?> </td>
-                    <td align="right"> <?=number_format($row['nominal'],'0',',','.');?> </td>
-                    <td align="right"> <?=number_format($row['pph'],'0',',','.');?> </td>
-                    <td align="right"> Rp. <?=number_format($row['diterima'],'0',',','.');?> </td>
+                    <td align="right"> <?=number_format($row['nominal'],'2',',','.');?> </td>
+                    <td align="right"> <?=number_format($row['pph'],'2',',','.');?> </td>
+                    <td align="right"> Rp. <?=number_format($row['diterima'],'2',',','.');?> </td>
                     <td align="center"> <button class="btn btn-warning btn-xs" data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="right" data-bs-html="true" data-bs-content="<p>Kode Akses : <b><?=$row['kode_akses'];?></b></p>" title="" data-bs-original-title="<?=$row['nama'];?>"> <i class='bx bxs-low-vision'></i> </button></td>
-                   <?php
-                     }
+                    <?php
+                    // Tambahkan nilai ke total
+                    $total_nominal += (float)$row['nominal'];
+                    $total_pph += (float)$row['pph'];
+                    $total_diterima += (float)$row['diterima'];
+                    ?>
+        
+                  <?php
+                     endforeach;
                      ?>
                   </tr>
+                 
                 <?php 
                    }
                 } ?>
                 </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="4"> Total </td>
+                    <td align="right"><strong><?= number_format($total_nominal, 2, ',', '.'); ?></strong></td>
+                    <td align="right"><strong><?= number_format($total_pph, 2, ',', '.'); ?></strong></td>
+                    <td align="right"><strong><?= number_format($total_diterima, 2, ',', '.'); ?></strong></td>
+                  </tr> 
+                  <tr>
+                    <td colspan="7"><?= terbilang($total_nominal); ?></td>
+                  </tr>
+                  </tfoot>
                 </table>
             </div>
                 </div>

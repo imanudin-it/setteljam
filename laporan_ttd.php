@@ -1,5 +1,6 @@
 <?php
 // Mulai output buffering
+require_once('./function.php');
 if (isset($_GET['kode'])) {
     $kode = $_GET['kode'];
 
@@ -75,20 +76,29 @@ if (isset($_GET['kode'])) {
     </tr>
     </thead>
     <tbody>
-
+    <?php
+                // Inisialisasi variabel total
+                $total_nominal = 0.0;
+                $total_pph = 0.0;
+                $total_diterima = 0.0;
+                ?>
     <?php
     $no = 1; $totals=0;
     foreach ($results as $row) {
-        $totals = $totals+$row['nominal'];
+        // Tambahkan nilai ke total
+        $total_nominal += (float)$row['nominal'];
+        $total_pph += (float)$row['pph'];
+        $total_diterima += (float)$row['diterima'];   
+
         $sisi = ($no % 2 == 1) ? 'kiri' : 'kanan';
         ?>
         <tr>
             <td valign="middle" align="center"> <?= $no; ?> </td>
             <td> <?= $row['nama']; ?> </td>
             <td> <?= $row['jabatan']; ?> </td>
-            <td valign="middle" align="right"> <?= number_format($row['nominal'], '0', ',', '.'); ?> </td>
-            <td align="right"> <?=number_format($row['pph'],'0',',','.');?> </td>
-            <td align="right"> <?=number_format($row['diterima'],'0',',','.');?> </td>
+            <td valign="middle" align="right"> <?= number_format($row['nominal'], '2', ',', '.'); ?> </td>
+            <td align="right"> <?=number_format($row['pph'],'2',',','.');?> </td>
+            <td align="right"> <?=number_format($row['diterima'],'2',',','.');?> </td>
             <?php if ($sisi == 'kiri') {
                 $next = $no + 1;
                 echo '<td rowspan="2" valign="top"> <small> ' . $no . '</small> <img src="' . $row['ttd'] . '" style="width:50px; height:50px;"> </td>
@@ -99,7 +109,10 @@ if (isset($_GET['kode'])) {
                     echo '</tr> <tr> <td> - </td> <td> - </td> <td> - </td> <td> - </td> <td> - </td> <td> - </td> </tr>';
                 }
                 echo '</td> ';
+
+                            
             }
+
             ?>
         </tr>
        
@@ -108,25 +121,21 @@ if (isset($_GET['kode'])) {
         
     }
     ?>
-    <tfoot>
-    <!--<tr> <td colspan="3" > Total  </td> <td align="right"> <?=number_format($totals,'0',',','.'); ?></td></tr>-->
-    </tfoot>
+    
+                  <tr>
+                    <td colspan="3"> Total </td>
+                    <td align="right"><strong><?= number_format($total_nominal, 2, ',', '.'); ?></strong></td>
+                    <td align="right"><strong><?= number_format($total_pph, 2, ',', '.'); ?></strong></td>
+                    <td align="right"><strong><?= number_format($total_diterima, 2, ',', '.'); ?></strong></td>
+                  </tr> 
+                  
     </tbody>
 </table>
 <br>
 <br>
 <table width="100%" style="font-size:11px;">
-    <tr>
-        <td width="70%"> &nbsp;</td>
-        <td width="%" align="center"> Sambas, <?=date('d M Y', strtotime($row['tanggal']));?> <br>
-        Direktur <?=$namaRS;?>
-    <br>
-<br>
-<br>
-<br>
-( ___________________ ) <br>
- </td>
-    </tr>
+    <tr> <td> Terbilang : </td> </tr>
+     <tr> <td >  <b> <?= terbilang($total_nominal); ?> </b></td> </tr>
 </table>
 </body>
 </html>
