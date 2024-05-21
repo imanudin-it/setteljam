@@ -63,14 +63,14 @@ if (isset($_GET['kode'])) {
     <center><b><?= $judul; ?></b></center>
 </div>
 
-<table width="100%" class="table table-bordered table-hover" style="font-size: 11px;">
+<table width="100%" class="table table-bordered table-hover" style="font-size: 10px;">
     <thead align="center">
     <tr align="center">
         <th width="5%"> No </th>
         <th> Nama </th>
         <th> Jabatan </th>
         <th> Jumlah (Rp.) </th>
-        <th width="10%"> PPh (Rp.) </th>
+        <th> PPh (Rp.) </th>
         <th> Diterima (Rp.) </th>
         <th colspan="2"> Tanda Tangan</th>
     </tr>
