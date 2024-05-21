@@ -98,7 +98,7 @@
                     <td> <?=$row['jabatan'];?> </td>
                     <td align="right"> <?=number_format($row['nominal'],'2',',','.');?> </td>
                     <td align="right"> <?=number_format($row['pph'],'2',',','.');?> </td>
-                    <td align="right"> Rp. <?=number_format($row['diterima'],'2',',','.');?> </td>
+                    <td align="right"> <?=number_format($row['diterima'],'2',',','.');?> </td>
                     <td align="center"> <button class="btn btn-warning btn-xs" data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="right" data-bs-html="true" data-bs-content="<p>Kode Akses : <b><?=$row['kode_akses'];?></b></p>" title="" data-bs-original-title="<?=$row['nama'];?>"> <i class='bx bxs-low-vision'></i> </button></td>
                     <?php
                     // Tambahkan nilai ke total

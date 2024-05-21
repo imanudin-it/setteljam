@@ -63,7 +63,7 @@ if (isset($_GET['kode'])) {
     <center><b><?= $judul; ?></b></center>
 </div>
 
-<table width="100%" class="table table-bordered table-hover">
+<table width="100%" class="table table-bordered table-hover" style="font-size: 11px;">
     <thead align="center">
     <tr align="center">
         <th width="5%"> No </th>
