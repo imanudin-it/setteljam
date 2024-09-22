@@ -5,7 +5,7 @@
     require_once($_SERVER['DOCUMENT_ROOT'] . '/db-config.php');
     require_once($_SERVER['DOCUMENT_ROOT'] . '/layouts/header.php');
     
-if($_SESSION['user']!='admin'){
+if($_SESSION['status']!='admin'){
     header('Location: /');
 }
 ?>
