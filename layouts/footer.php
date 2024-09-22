@@ -30,13 +30,13 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-    <script src="./assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="./assets/vendor/libs/popper/popper.js"></script>
-    <script src="./assets/vendor/js/bootstrap.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/vendor/libs/popper/popper.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/vendor/js/bootstrap.js"></script>
 
-    <script src="./assets/vendor/js/menu.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/vendor/js/menu.js"></script>
     <!-- endbuild -->
-    <script src="./assets/DataTables/datatables.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/DataTables/datatables.js"></script>
     <script>
 $(document).ready( function () {
     // Inisialisasi DataTable
@@ -46,5 +46,5 @@ $(document).ready( function () {
 } );
 </script>
     <!-- Main JS -->
-    <script src="./assets/js/main.js"></script>
-    <script src="./assets/js/ui-popover.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/js/main.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/js/ui-popover.js"></script>

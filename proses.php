@@ -8,7 +8,7 @@ if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
         $decoded_image = base64_decode($encoded_image);
         
         // Folder untuk menyimpan gambar
-        $folder = './images/' . $_POST['kode'] . '/';
+        $folder = '/images/' . $_POST['kode'] . '/';
         
         // Jika folder tidak ada, buat folder tersebut
         if (!file_exists($folder)) {

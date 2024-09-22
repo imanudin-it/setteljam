@@ -1,12 +1,18 @@
 <?php 
 session_start();
-require_once('./db-config.php');
-require_once('./enc.php');
+if(isset($_SESSION['user'])){
+  header('Location: /');
+  exit;
+}
+require_once('../db-config.php');
+require_once('../enc.php');
 $pesan = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   $username = htmlspecialchars($_POST['user']);
   $password = htmlspecialchars($_POST['password']);
+  
+  //cekAdmin
   $stmt = $pdo->prepare("SELECT * FROM admin WHERE user = :user");
   // Bind parameter ke dalam statement
   $stmt->bindParam(':user', $username);
@@ -23,16 +29,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           // Login berhasil
           $_SESSION['user'] = $row['user'];
           $_SESSION['data'] = $row; 
-          header('Location: index.php');
+          $_SESSION['status'] = 'admin';
+          header('Location: /adm/');
           exit;
       } else {
           // Password tidak cocok
           $pesan = "Username atau password salah!";
       }
   } else {
+    //cekUser
+    $stmt = $pdo->prepare("SELECT * FROM pegawai WHERE nip = :user");
+    // Bind parameter ke dalam statement
+    $stmt->bindParam(':user', $username);
+    // Mengeksekusi statement
+    $stmt->execute();
+
+    // Mengambil baris pertama dari hasil query
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($row) {
+      // Memeriksa apakah password yang diberikan cocok dengan hash yang disimpan dalam database
+      if (password_verify($password, $row['password'])) {
+          // Login berhasil
+          $_SESSION['user'] = $row['nip'];
+          $_SESSION['data'] = $row; 
+          $_SESSION['status'] = 'pegawai';
+          header('Location: /pegawai/');
+          // exit;
+      } else {
+          // Password tidak cocok
+          $pesan = "Username atau password salah!";
+      }
+  }else{
+
       // Username tidak ditemukan
       $pesan = "Username atau password salah!";
   }
+}
 }
 ?>
 
@@ -133,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
               <form id="formAuthentication" class="mb-3" action="" method="POST">
                 <div class="mb-3">
-                  <label for="email" class="form-label">Username</label>
+                  <label for="email" class="form-label">NIP/NRPTT :</label>
                   <input
                     type="text"
                     class="form-control"

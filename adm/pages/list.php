@@ -49,7 +49,7 @@
                  <span class="input-group-text">Periode : </span>
                     <input type="date" aria-label="periode a" class="form-control" name="tgl_a" value="<?php echo isset($_GET['tgl_a']) ? $_GET['tgl_a'] : date('Y-m-d'); ?>">
                     <input type="date" aria-label="periode b" class="form-control" name="tgl_b" value="<?php echo isset($_GET['tgl_b']) ? $_GET['tgl_b'] : date('Y-m-d'); ?>">
-                    <button type="submit" class="btn btn-primary"><i class="bx bx-search"></i> Cari </button>
+                    <button type="submit" class="btn btn-primary" name="link" value="list"><i class="bx bx-search"></i> Cari </button>
                </div>
                 </form>
             </div>
@@ -126,15 +126,16 @@
                                     </div>
                                   </div>
                                   <div style="float: left;">
-                                      <?php 
+                                      <?php /*
                                         if(empty($row['spj'])){
-                                          echo'<a href="./spj?buat='.$row['kode_transaksi'].'" class="btn btn-info btn-sm"><i class="bx bxs-file-plus" ></i> Buat SPJ </i></a>';
+                                         // echo'<a href="./spj?buat='.$row['kode_transaksi'].'" class="btn btn-info btn-sm"><i class="bx bxs-file-plus" ></i> Buat SPJ </i></a>';
                                         }else{
                                           echo'<a href="./spj?buat='.$row['kode_transaksi'].'" class="btn btn-info btn-sm"><i class="bx bxs-file"></i> Print SPJ </i></a>';
                                         }
+                                          */
                                       ?>
                                       
-                                      <a href="./laporan?kode=<?=$row['kode_transaksi'];?>" class="btn btn-success btn-sm">
+                                      <a href="./?link=laporan&kode=<?=$row['kode_transaksi'];?>" class="btn btn-success btn-sm">
                                       <i class='bx bxs-report' ></i> Berkas Tanda Tangan  
                                         </a> 
                                   </div>

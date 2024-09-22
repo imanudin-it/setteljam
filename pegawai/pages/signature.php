@@ -1,55 +1,27 @@
 
-<!DOCTYPE html>
-<?php 
-    require_once('./db-config.php');
-    require_once('./layouts/header.php');
-    ?>
-
+<div class="row">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <body>
          <style>
             /* mengatur ukuran canvas tanda tangan  */
             canvas {
                 border: 1px solid #ccc;
                 border-radius: 0.5rem;
-                width: 300px;
+                width: 100%;
                 height: 300px;
             }
         </style>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar layout-without-menu">
-      <div class="layout-container">
-        <?php //menu 
-            //require_once('./layouts/menu.php'); 
-            ?>
-
-        <!-- Layout container -->
-        <div class="layout-page">
-        <?php //navbar 
-            require_once('./layouts/navbar.php'); 
-            ?>
-
-         <!-- Content wrapper -->
-         <div class="content-wrapper">
-            <!-- Content -->
-            
-            <div class="container-xxl flex-grow-1 container-p-y">
-                
-                <div class="row">
+   
               <?php 
               $kode = isset($_GET['kode']) ? $_GET['kode'] : '';
-              $nik = isset($_GET['nik']) ? $_GET['nik'] : '';
-              $kode_akses = isset($_GET['kode_akses']) ? $_GET['kode_akses'] : '';
               if($kode){ 
                 $sql = "SELECT a.*, b.nama as judul FROM ttd_jasa a
                         LEFT JOIN judul b on b.kode_transaksi = a.kode_transaksi 
-                        WHERE a.kode_transaksi = :kode AND a.nik = :nik AND a.kode_akses = :kode_akses";
+                        WHERE a.kode_transaksi = :kode AND a.nik = :nik";
                 $stmt = $pdo->prepare($sql);
 
                 $stmt->execute([':kode' => $kode,
-                                 ':nik' => $nik,
-                                 ':kode_akses' => $kode_akses
-                                ]);
+                                 ':nik' => $akses['nip'],
+                                 ]);
                 $result = $stmt->fetch(PDO::FETCH_ASSOC);
                  if (!$result) {
                         echo "<center> 
@@ -99,6 +71,7 @@
                     <div class="card shadow-none bg-transparent border border-info mb-3">
                         <div class="card-header"> Silahkan Tanda Tangan : </div>
                         <div class="card-body mb-0" align="center"> <font color="red"><small> * Usahakan besar tanda tangan sesuai kotak ! </small></font>
+                        <hr class="text-muted">
                         <canvas id="signature-pad" class="signature-pad"></canvas>
     
                     </div>
@@ -133,17 +106,9 @@
             </div>
       </div>
     </div>
-            <!-- / Content -->
-
-            <?php 
-            //footer 
-                require_once('./layouts/footer.php');
-                ?>
-               
-        </div> 
-      </div>
-    </div>
-    <script src="./assets/js/signature_pad.min.js"></script>
+    <script src="//<?=$_SERVER['HTTP_HOST'] ;?>/assets/vendor/libs/jquery/jquery.js"></script>
+    
+    <script src="/assets/js/signature_pad.min.js"></script>
     <script>
             // script di dalam ini akan dijalankan pertama kali saat dokumen dimuat
             document.addEventListener('DOMContentLoaded', function () {
@@ -190,7 +155,7 @@
     // Ubah konten elemen menjadi tampilan loading
     prosesElement.innerHTML = '<div class="spinner-border text-success" role="status"> <span class="visually-hidden">Loading...</span> </div>';
     $.ajax({
-        url: "proses.php",
+        url: "/proses.php",
         data: {
             foto: signature,
             id: <?=$id;?>,

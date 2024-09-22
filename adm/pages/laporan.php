@@ -45,8 +45,8 @@
                     <div class="card">
                         <div class="card-body">
                         <!-- <div class="btn-group pull-right mb-3"> <button class="btn btn-info btn-sm" onclick="printDiv('laporan')"/> <i class='bx bx-printer' ></i> | PRINT </button> <button class="btn btn-success btn-sm" id="excel"> <i class='bx bx-table' ></i> | EXCEL </button> </div>  -->
-                        <a onclick="javascript:window.history.back()" class="btn btn-warning btn-sm mb-3" href="./index.php"> <i class="bx bx-arrow-back"></i> &nbsp; </a>
-                        <a href="laporan_ttd.php?kode=<?=$kode;?>" target="_blank" class="btn btn-success btn-sm mb-3"  id="pdf"> <i class='bx bxs-file-pdf' ></i> Download PDF </a> 
+                        <button onclick="javascript:window.history.back()" class="btn btn-warning btn-sm mb-3"> <i class="bx bx-arrow-back"></i> &nbsp; </button>
+                        <a href="/laporan_ttd.php?kode=<?=$kode;?>" target="_blank" class="btn btn-success btn-sm mb-3"  id="pdf"> <i class='bx bxs-file-pdf' ></i> Download PDF </a> 
                         
             <style>
            		table {
