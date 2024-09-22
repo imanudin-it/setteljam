@@ -155,7 +155,7 @@
     // Ubah konten elemen menjadi tampilan loading
     prosesElement.innerHTML = '<div class="spinner-border text-success" role="status"> <span class="visually-hidden">Loading...</span> </div>';
     $.ajax({
-        url: "/proses.php",
+        url: "./proses.php",
         data: {
             foto: signature,
             id: <?=$id;?>,
