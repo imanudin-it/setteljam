@@ -179,7 +179,7 @@
             } else {
                 Swal.fire({
                   title: 'Error 😒 ',
-                  text: 'Tidak terhubung ke sistem !',
+                  text: response.trim(),
                   icon: 'error',
                   confirmButtonText: 'Ok'
                 })

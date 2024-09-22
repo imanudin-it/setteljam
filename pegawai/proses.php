@@ -1,6 +1,6 @@
 <?php
 if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-    require_once('./db-config.php');
+    require_once('../db-config.php');
 
     if (isset($_POST['foto'])) { 
         $data_uri = $_POST['foto'];
