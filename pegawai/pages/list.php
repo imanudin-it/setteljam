@@ -51,38 +51,41 @@
                     </thead>
                     <tbody>
                     <?php 
-                        if(empty(isset($_GET['tgl_a']))){ 
-                          $sql = "SELECT a.*, b.* 
-                          FROM ttd_jasa a
-                          LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
-                          WHERE a.nik = :nip
-                          AND (
-                              MONTH(b.tanggal) = MONTH(NOW()) 
-                              AND YEAR(b.tanggal) = YEAR(NOW())
-                          )";
-                          $stmt = $pdo->prepare($sql);
-                            ?>
-                            
-                        <?php }else{ 
-                            $sql = "SELECT a.*, b.* FROM ttd_jasa a
-                            LEFT JOIN judul b on b.kode_transaksi = a.kode_transaksi 
-                             WHERE 
-                             a.nik = :nip
-                             AND
-                             (
-                             b.tanggal BETWEEN :start_date AND :end_date
-                             )
-                             ";
-                             
-                             $stmt->bindParam(':nip', $_SESSION['data']['nip']);
-                             $stmt->bindParam(':start_date', $_GET['tgl_a']);
-                             $stmt->bindParam(':end_date', $_GET['tgl_b']);
-                        }
-                            
-                            $stmt->execute();
-
-                            // Ambil data yang dipilih
-                            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                       <?php
+                       if (!isset($_GET['tgl_a']) || empty($_GET['tgl_a'])) { 
+                           // Query untuk bulan dan tahun saat ini
+                           $sql = "SELECT a.*, b.* 
+                                   FROM ttd_jasa a
+                                   LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
+                                   WHERE a.nik = :nip
+                                   AND (
+                                       MONTH(b.tanggal) = MONTH(NOW()) 
+                                       AND YEAR(b.tanggal) = YEAR(NOW())
+                                   )";
+                           
+                           $stmt = $pdo->prepare($sql);
+                           $stmt->bindParam(':nip', $_SESSION['data']['nip']);
+                           
+                       } else { 
+                           // Query untuk rentang tanggal
+                           $sql = "SELECT a.*, b.* 
+                                   FROM ttd_jasa a
+                                   LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
+                                   WHERE a.nik = :nip
+                                   AND b.tanggal BETWEEN :start_date AND :end_date";
+                           
+                           $stmt = $pdo->prepare($sql);
+                           $stmt->bindParam(':nip', $_SESSION['data']['nip']);
+                           $stmt->bindParam(':start_date', $_GET['tgl_a']);
+                           $stmt->bindParam(':end_date', $_GET['tgl_b']);
+                       }
+                       
+                       $stmt->execute();
+                       
+                       // Ambil data yang dipilih
+                       $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                       ?>
+                       
 
                             // Gunakan data yang telah dipilih
                             $no = 1;
