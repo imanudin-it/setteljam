@@ -52,11 +52,18 @@
                     <tbody>
                     <?php 
                         if(!isset($_GET['tgl_a'])){ 
+                          $sql = "SELECT a.*, b.* 
+                          FROM ttd_jasa a
+                          LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
+                          WHERE a.nik = :nip
+                          AND (
+                              MONTH(b.tanggal) = MONTH(NOW()) 
+                              AND YEAR(b.tanggal) = YEAR(NOW())
+                          )
+
+                             ";
                             ?>
-                            <tr>
-                            <td>-</td>
-                            <td>Pilih periode terlebih dahulu !</td>
-                            </tr>
+                            
                         <?php }else{ 
                             $sql = "SELECT a.*, b.* FROM ttd_jasa a
                             LEFT JOIN judul b on b.kode_transaksi = a.kode_transaksi 
@@ -67,7 +74,7 @@
                              b.tanggal BETWEEN :start_date AND :end_date
                              )
                              ";
-
+                        }
                             $stmt = $pdo->prepare($sql);
                             $stmt->bindParam(':nip', $_SESSION['data']['nip']);
                             $stmt->bindParam(':start_date', $_GET['tgl_a']);
@@ -158,7 +165,6 @@
                                     </tr>
                                 ';
 
-                            }
                             } ?>
                     </tbody>
                 </table>
