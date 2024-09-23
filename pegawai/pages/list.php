@@ -3,18 +3,43 @@
 <h5 class="card-header mb-3"> <i class="bx bx-list-ol"></i> List Berkas :
 <span style="float:right" ><small><a href="javascript: window.history.back()"class="badge badge-sm bg-warning">&laquo; Kembali</a></small></span> </h5>
      <div class="card-body mb-2">
-        <div class="row">
-            <div class="col-md-8 col-lg-8 mx-auto" align="right">
-                <form action="" method="GET">
-            <div class="input-group">
-                 <span class="input-group-text">Periode : </span>
-                    <input type="date" aria-label="periode a" class="form-control" name="tgl_a" value="<?php echo isset($_GET['tgl_a']) ? $_GET['tgl_a'] : date('Y-m-d'); ?>">
-                    <input type="date" aria-label="periode b" class="form-control" name="tgl_b" value="<?php echo isset($_GET['tgl_b']) ? $_GET['tgl_b'] : date('Y-m-d'); ?>">
-                    <button type="submit" class="btn btn-primary" name="link" value="list"><i class="bx bx-search"></i> Cari </button>
-               </div>
-                </form>
-            </div>
-        </div>
+     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#basicModal">
+     <i class='bx bx-search-alt'></i> Pilih Periode Laporan </button>
+                        </button>
+
+                        <div class="modal fade" id="basicModal" tabindex="-1" style="display: none;" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                          <form action="" method="GET">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel1">Periode Laporan</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                             
+                                <div class="row g-2">
+                                  <div class="col mb-0">
+                                    <label for="emailBasic" class="form-label">Tgl. Mulai</label>
+                                    <input type="date" id="emailBasic" class="form-control" placeholder="DD / MM / YY" name="tgl_a" value="<?php echo isset($_GET['tgl_a']) ? $_GET['tgl_a'] : date('Y-m-d'); ?>">
+                                  </div>
+                                  <div class="col mb-0">
+                                    <label for="dobBasic" class="form-label">Sampai</label>
+                                    <input type="date" id="dobBasic" class="form-control" placeholder="DD / MM / YY" name="tgl_b" value="<?php echo isset($_GET['tgl_b']) ? $_GET['tgl_b'] : date('Y-m-d'); ?>">
+                                  </div>
+                                </div>
+                              
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                  Tutup
+                                </button>
+                                <button type="submit" name="link" value="list" class="btn btn-primary"><i class='bx bx-search-alt'></i> Cari </button>
+                              </div>
+                            </div>
+                          </div>
+                          </form>
+                        </div>
+        
         <br>
         <div class="table-responsive ">
                   <table class="table" id="myTable">

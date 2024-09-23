@@ -41,15 +41,15 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block"><?=$user;?></span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block"><?=$_SESSION['data']['nama'];?></span>
+                            <small class="text-muted"><?=$_SESSION['status'];?> </small>
                           </div>
                         </div>
                       </a>
                     </li>
                     
                     <li>
-                      <a class="dropdown-item" href="logout.php">
+                      <a class="dropdown-item" href="/logout.php">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -62,3 +62,27 @@
           </nav>
 
           <!-- / Navbar -->
+
+
+          <!-- / Navbar -->
+          <nav style="font-size:10px; background-color: #fcfdfd !important; border-top-left-radius: 1.0rem; border-top-right-radius: 1.0rem;" class="navbar navbar-white navbar-expand fixed-bottom text-white d-md-none d-lg-none d-xl-none">
+      <ul class="navbar-nav nav-justified w-100">
+     
+      <li class="nav-item" style="border-left:1px gey" title="Service">
+        <a href="/" class="nav-link" >
+        <i class='bx bx-home'></i><br> Home
+          </a>
+      </li>
+       <li class="nav-item" style="border-left: 2px solid #eceef1; border-right: 2px solid #eceef1;">
+         <a href="#portofolio" class="nav-link" title="Portofolio">
+         <i class='bx bx-refresh'></i> <br> Refresh
+         </a>
+      </li>
+      <li class="nav-item" style="border-left: 0px solid #eceef1; border-right: 2px solid #eceef1;">
+         <a href="#contact" class="nav-link" title="Chat">
+         <i class='bx bx-left-arrow-alt'></i><br>Back
+         </a>
+      </li>
+      
+    </ul>
+  </nav>
