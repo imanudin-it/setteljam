@@ -60,6 +60,7 @@
                               MONTH(b.tanggal) = MONTH(NOW()) 
                               AND YEAR(b.tanggal) = YEAR(NOW())
                           )";
+                          $stmt = $pdo->prepare($sql);
                             ?>
                             
                         <?php }else{ 
@@ -72,11 +73,12 @@
                              b.tanggal BETWEEN :start_date AND :end_date
                              )
                              ";
+                             
+                             $stmt->bindParam(':nip', $_SESSION['data']['nip']);
+                             $stmt->bindParam(':start_date', $_GET['tgl_a']);
+                             $stmt->bindParam(':end_date', $_GET['tgl_b']);
                         }
-                            $stmt = $pdo->prepare($sql);
-                            $stmt->bindParam(':nip', $_SESSION['data']['nip']);
-                            $stmt->bindParam(':start_date', $_GET['tgl_a']);
-                            $stmt->bindParam(':end_date', $_GET['tgl_b']);
+                            
                             $stmt->execute();
 
                             // Ambil data yang dipilih
