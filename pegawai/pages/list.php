@@ -91,7 +91,7 @@
                                 $tr = "bg-label-warning";
                               }else {$tr = "bg-label-success"; }
                               echo'
-                                    <tr class="'.$tr.' text-white">
+                                    <tr class="'.$tr.' text-primary">
                                     <td> '.$no++.' </td>
                                     '; ?>
                                     <td> <a href="./?link=ttd&kode=<?=$row['kode_transaksi'];?>"><small>  
