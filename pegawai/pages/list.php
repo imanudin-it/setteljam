@@ -50,7 +50,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <?php 
                        <?php
                        if (!isset($_GET['tgl_a']) || empty($_GET['tgl_a'])) { 
                            // Query untuk bulan dan tahun saat ini
