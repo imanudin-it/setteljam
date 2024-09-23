@@ -51,7 +51,7 @@
                     </thead>
                     <tbody>
                     <?php 
-                        if(!isset($_GET['tgl_a'])){ 
+                        if(empty(isset($_GET['tgl_a']))){ 
                           $sql = "SELECT a.*, b.* 
                           FROM ttd_jasa a
                           LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
@@ -59,9 +59,7 @@
                           AND (
                               MONTH(b.tanggal) = MONTH(NOW()) 
                               AND YEAR(b.tanggal) = YEAR(NOW())
-                          )
-
-                             ";
+                          )";
                             ?>
                             
                         <?php }else{ 
