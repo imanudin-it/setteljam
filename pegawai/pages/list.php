@@ -83,9 +83,7 @@
                        
                        // Ambil data yang dipilih
                        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                       ?>
-                       
-
+                      
                             // Gunakan data yang telah dipilih
                             $no = 1;
                             foreach ($results as $row) {
