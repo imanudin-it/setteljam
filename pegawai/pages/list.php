@@ -3,7 +3,7 @@
 <h5 class="card-header mb-3"> <i class="bx bx-list-ol"></i> List Berkas :
 <span style="float:right" ><small><a href="javascript: window.history.back()"class="badge badge-sm bg-warning">&laquo; Kembali</a></small></span> </h5>
      <div class="card-body mb-2">
-     <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#basicModal">
+     <button type="button" class="btn btn-sm btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#basicModal">
      <i class='bx bx-search-alt'></i> Pilih Periode Laporan </button>
                         </button>
 
