@@ -68,18 +68,18 @@
           <nav style="font-size:10px; background-color: #fcfdfd !important; border-top-left-radius: 1.0rem; border-top-right-radius: 1.0rem;" class="navbar navbar-white navbar-expand fixed-bottom text-white d-md-none d-lg-none d-xl-none">
       <ul class="navbar-nav nav-justified w-100">
      
-      <li class="nav-item" style="border-left:1px gey" title="Service">
+      <li class="nav-item" style="border-left:1px gey">
         <a href="/" class="nav-link" >
         <i class='bx bx-home'></i><br> Home
           </a>
       </li>
        <li class="nav-item" style="border-left: 2px solid #eceef1; border-right: 2px solid #eceef1;">
-         <a href="#portofolio" class="nav-link" title="Portofolio">
+         <a href="#" onclick="javascript:window.location.reload()" class="nav-link">
          <i class='bx bx-refresh'></i> <br> Refresh
          </a>
       </li>
       <li class="nav-item" style="border-left: 0px solid #eceef1; border-right: 2px solid #eceef1;">
-         <a href="#contact" class="nav-link" title="Chat">
+         <a href="#" onclick="javascript:window.history.back()" class="nav-link">
          <i class='bx bx-left-arrow-alt'></i><br>Back
          </a>
       </li>
