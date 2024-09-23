@@ -87,8 +87,11 @@
                             // Gunakan data yang telah dipilih
                             $no = 1;
                             foreach ($results as $row) {
-                                echo'
-                                    <tr>
+                              if(empty($row['ttd']) || $row['ttd']=='-') {
+                                $tr = "bg-label-warning";
+                              }else {$tr = "bg-label-success"; }
+                              echo'
+                                    <tr class="'.$tr.'">
                                     <td> '.$no++.' </td>
                                     '; ?>
                                     <td> <a href="./?link=ttd&kode=<?=$row['kode_transaksi'];?>"><small>  
