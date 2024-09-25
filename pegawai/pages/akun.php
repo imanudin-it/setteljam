@@ -14,7 +14,7 @@
                             <div class="card mb-4">
                             <div class="card-body">
                             <div class="d-flex align-items-start align-items-sm-center gap-4 mb-4">
-                        <img src="../assets/img/avatars/user.webp" alt="user-avatar" class="d-block rounded" height="95" width="100" id="uploadedAvatar">
+                        <img src="../assets/img/avatars/user.webp" alt="user-avatar" class="d-block rounded" height="80" width="80" id="uploadedAvatar">
                         <div class="button-wrapper">
                         <h5> <?=$_SESSION['data']['nama'];?> </h5>
                         <p class="text-muted mb-0"><?=$_SESSION['data']['nip'];?></p>
