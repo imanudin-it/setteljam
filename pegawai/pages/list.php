@@ -73,7 +73,7 @@
                                    LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
                                    WHERE a.nik = :nip
                                    AND b.tanggal BETWEEN :start_date AND :end_date
-                                   OR a.ttd is NULL";
+                                  ";
                            
                            $stmt = $pdo->prepare($sql);
                            $stmt->bindParam(':nip', $_SESSION['data']['nip']);
