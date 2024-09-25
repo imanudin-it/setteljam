@@ -13,7 +13,18 @@
                         <div class="row">
                             <div class="col-md-4 col-lg-4">
                              
-                        <div class="d-flex justify-content-center pt-4 gap-2">
+                            <div class="d-flex align-items-start align-items-sm-center gap-4 mb-4">
+                        <img src="../assets/img/avatars/user.webp" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+                        <div class="button-wrapper">
+                        <h5> <?=$_SESSION['data']['nama'];?> </h5>
+                        <p class="text-muted mb-0"><?=$_SESSION['data']['nip'];?></p>
+                        </div>
+                        
+                      </div>
+                      
+
+
+                        <!-- <div class="d-flex justify-content-center pt-4 gap-2">
                             <div class="flex-shrink-0" style="position: relative;">
                               <div id="expensesOfWeek" style="min-height: 57.7px;">
                               <img src="../assets/img/avatars/user.png" alt="user-avatar" class="d-block rounded" height="80" width="80" id="uploadedAvatar">
@@ -23,7 +34,7 @@
                               <h4 class="mt-2 mb-2"><?=$_SESSION['data']['nama'];?></h4>
                               <small class="text-muted"> <?=$_SESSION['data']['nip'];?></small>
                             </div>
-                          </div>
+                          </div> -->
                             </div>
                             <div class="col-md-8 col-lg-8">
                                 <div class="card">
