@@ -39,6 +39,10 @@ if($_SESSION['status']!='pegawai'){
                   require_once('./pages/list.php');
                 break;
                 
+                case  'akun'  :
+                  require_once('./pages/akun.php');
+                break;
+                
                 case  'ttd'  :
                   require_once('./pages/signature.php');
                 break;
