@@ -57,10 +57,11 @@
                                    FROM ttd_jasa a
                                    LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
                                    WHERE a.nik = :nip
-                                   AND (
-                                       MONTH(b.tanggal) = MONTH(NOW()) 
-                                       AND YEAR(b.tanggal) = YEAR(NOW())
-                                   )";
+                                  --  or (
+                                  --      MONTH(b.tanggal) = MONTH(NOW()) 
+                                  --      AND YEAR(b.tanggal) = YEAR(NOW())
+                                  --  )
+                                   AND a.ttd is NULL";
                            
                            $stmt = $pdo->prepare($sql);
                            $stmt->bindParam(':nip', $_SESSION['data']['nip']);
@@ -71,7 +72,8 @@
                                    FROM ttd_jasa a
                                    LEFT JOIN judul b ON b.kode_transaksi = a.kode_transaksi 
                                    WHERE a.nik = :nip
-                                   AND b.tanggal BETWEEN :start_date AND :end_date";
+                                   AND b.tanggal BETWEEN :start_date AND :end_date
+                                   OR a.ttd is NULL";
                            
                            $stmt = $pdo->prepare($sql);
                            $stmt->bindParam(':nip', $_SESSION['data']['nip']);

@@ -42,7 +42,7 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-semibold d-block"><?=$_SESSION['data']['nama'];?></span>
-                            <small class="text-muted"><?=$_SESSION['status'];?> </small>
+                            <small class="text-muted"><?=$_SESSION['data']['nip'];?> </small>
                           </div>
                         </div>
                       </a>
