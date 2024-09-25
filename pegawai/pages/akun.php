@@ -1,8 +1,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <div class="card mb-2">
-<h5 class="card-header mb-3"> <i class="bx bx-list-ol"></i> Pengaturan Akun :
-<span style="float:right" ><small><a href="javascript: window.history.back()"class="badge badge-sm bg-warning">&laquo; Kembali</a></small></span> </h5>
+<h5 class="card-header mb-3"> <i class="bx bx-list-ol"></i> Pengaturan Akun :</h5>
 </div>  
 
                       <!-- <div class="d-flex align-items-start align-items-sm-center gap-4">
@@ -13,9 +12,9 @@
                         <div class="row">
                             <div class="col-md-4 col-lg-4">
                             <div class="card mb-4">
-                            <div class="card-body mb-2">
+                            <div class="card-body">
                             <div class="d-flex align-items-start align-items-sm-center gap-4 mb-4">
-                        <img src="../assets/img/avatars/user.webp" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+                        <img src="../assets/img/avatars/user.webp" alt="user-avatar" class="d-block rounded" height="95" width="100" id="uploadedAvatar">
                         <div class="button-wrapper">
                         <h5> <?=$_SESSION['data']['nama'];?> </h5>
                         <p class="text-muted mb-0"><?=$_SESSION['data']['nip'];?></p>
