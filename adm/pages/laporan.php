@@ -47,7 +47,8 @@
                         <!-- <div class="btn-group pull-right mb-3"> <button class="btn btn-info btn-sm" onclick="printDiv('laporan')"/> <i class='bx bx-printer' ></i> | PRINT </button> <button class="btn btn-success btn-sm" id="excel"> <i class='bx bx-table' ></i> | EXCEL </button> </div>  -->
                         <button onclick="javascript:window.history.back()" class="btn btn-warning btn-sm mb-3"> <i class="bx bx-arrow-back"></i> &nbsp; </button>
                         <a href="/laporan_ttd.php?kode=<?=$kode;?>" target="_blank" class="btn btn-success btn-sm mb-3"  id="pdf"> <i class='bx bxs-file-pdf' ></i> Download PDF </a> 
-                        
+                        <div style="float:right"> <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Berkas dan tanda tangan akan dihapus </small> <div align='right' class='mt-2'><a href='./?link=list&hapus=<?=$kode;?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Yakin akan dihapus ?" aria-describedby="popover583573"><i class='bx bx-trash'></i> Hapus </button>
+                        </div>
             <style>
            		table {
                 border-collapse: collapse;

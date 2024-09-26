@@ -1,5 +1,10 @@
 <?php
 session_start();
+if(empty($_SESSION['data'])){
+    http_response_code(500);
+    header('Location: /404/');
+    exit();
+}
 include '../../db-config.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

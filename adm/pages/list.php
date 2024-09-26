@@ -91,67 +91,12 @@
                                     <tr>
                                     <td> '.$no++.' </td>
                                     '; ?>
-                                    <td> <a data-bs-toggle='modal'
-                          data-bs-target='#data<?=$row['id'];?>'href="#"><small>  
+                                     <td> 
+                                     
+                         <a href="./?link=laporan&kode=<?=$row['kode_transaksi'];?>"><small>  
                           <span class="badge bg-secondary badge-sm mb-2"><cite><?=date('d-m-Y', strtotime($row['tanggal']));?></cite> </span> - <span class="badge bg-warning badge-sm"><cite><?=$row['kode_transaksi'];?></cite> </span>
                         </small> <br> <?=$row['nama'];?></a></td> 
 
-                                        
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="data<?=$row['id'];?>" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="modalCenterTitle"><span class="badge bg-warning badge-sm">Kode : <cite><?=$row['kode_transaksi'];?></cite> </span>
-                                </h5>
-                                <button
-                                  type="button"
-                                  class="btn-close"
-                                  data-bs-dismiss="modal"
-                                  aria-label="Close"
-                                ></button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <div class="col mb-3">
-                                  <textarea class="form-control mb-2" disabled><?=$row['nama'];?></textarea>
-                                    <label for="nameWithTitle" class="form-label">Url :</label>
-                                      <div class="input-group">
-                                        <input type="text" id="link<?=$row['id'];?>" class="form-control" value="http://<?=$_SERVER['SERVER_NAME'];?>/<?=$folder;?>ttd.php?kode=<?=$row['kode_transaksi'];?>" aria-describedby="button-addon2">
-                                        <!-- <a target="_blank" class="btn btn-outline-primary" href="http://<?=$_SERVER['SERVER_NAME'];?>/<?=$folder;?>/ttd.php?kode=<?=$row['kode_transaksi'];?>">&raquo;</a> -->
-                                        <button type="button" class="btn btn-outline-primary" onclick="copyLink('link<?=$row['id'];?>')" title="Salin Link"><i class='bx bx-link-alt'></i></button>
-                                      </div>
-                                      <small><cite> Salin & Bagikan url ini untuk tanda tangan</cite></small>
-                                    </div>
-                                  </div>
-                                  <div style="float: left;">
-                                      <?php /*
-                                        if(empty($row['spj'])){
-                                         // echo'<a href="./spj?buat='.$row['kode_transaksi'].'" class="btn btn-info btn-sm"><i class="bx bxs-file-plus" ></i> Buat SPJ </i></a>';
-                                        }else{
-                                          echo'<a href="./spj?buat='.$row['kode_transaksi'].'" class="btn btn-info btn-sm"><i class="bx bxs-file"></i> Print SPJ </i></a>';
-                                        }
-                                          */
-                                      ?>
-                                      
-                                      <a href="./?link=laporan&kode=<?=$row['kode_transaksi'];?>" class="btn btn-success btn-sm">
-                                      <i class='bx bxs-report' ></i> Berkas Tanda Tangan  
-                                        </a> 
-                                  </div>
-                                </div>
-                              <div class="modal-footer">
-                              
-                              
-                              
-                                <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">
-                                <i class="bx bx-x-circle"></i>Batal
-                                </button>
-                                <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Berkas dan tanda tangan akan dihapus </small> <div align='right' class='mt-2'><a href='./list?hapus=<?php echo $row['kode_transaksi']; ?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Yakin akan dihapus ?" aria-describedby="popover583573"><i class='bx bx-trash'></i> Hapus </button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                                    <?php echo'
                                     </tr>
                                 ';
@@ -163,25 +108,3 @@
         </div>
   </div>
 </div>
-<script>
-function copyLink(id) {
-  var linkInput = document.getElementById(id);
-  linkInput.select();
-  document.execCommand('copy');
-  var notification = document.createElement('div');
-  notification.textContent = 'Link berhasil disalin!';
-  notification.style.position = 'fixed';
-  notification.style.top = '20px';
-  notification.style.right = '20px';
-  notification.style.padding = '10px';
-  notification.style.backgroundColor = '#4CAF50';
-  notification.style.color = 'white';
-  notification.style.borderRadius = '5px';
-  notification.style.zIndex = '9999';
-  document.body.appendChild(notification);
-
-  setTimeout(function() {
-    notification.style.display = 'none';
-  }, 5000);
-}
-</script>

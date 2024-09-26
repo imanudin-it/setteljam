@@ -9,12 +9,13 @@ if($_SESSION['status']!='admin'){
     header('Location: /');
 }
 ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-wrapper layout-content-navbar layout-without-menu">
       <div class="layout-container">
         <?php //menu 
-            require_once($_SERVER['DOCUMENT_ROOT'] . '/adm/layouts/menu.php'); 
+            //require_once($_SERVER['DOCUMENT_ROOT'] . '/adm/layouts/menu.php'); 
             ?>
 
         <!-- Layout container -->
@@ -41,6 +42,10 @@ if($_SESSION['status']!='admin'){
                 
                 case  'akun'  :
                   require_once('./pages/akun.php');
+                break;
+                
+                case  'pegawai'  :
+                  require_once('./pages/pegawai.php');
                 break;
                 
                 case  'laporan'  :
@@ -109,6 +114,16 @@ if($_SESSION['status']!='admin'){
                 </a>
                 </div>
                 <?php } ?> -->
+                <div class="col-md-4 col-lg-4 col-6">
+                <a href="./?link=pegawai"> 
+                <div class="card shadow bg-transparent border border-info mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title"><i class='bx bx-user'></i></h5>
+                      <p class="card-text">Akun / Pegawai</p>
+                    </div>
+                  </div>
+                </a>
+                </div>
             </div>
               </div>
             </div>
@@ -129,5 +144,17 @@ if($_SESSION['status']!='admin'){
         </div> 
       </div>
     </div>
+
+<?php if (isset($_SESSION['message']) && $_SESSION['message'] != '') { ?>
+    <script>
+        Swal.fire({
+            icon: '<?php echo $_SESSION['message_code']; ?>',
+            title: '<?php echo $_SESSION['message']; ?>',
+            text: '<?php echo $_SESSION['message_text']; ?>'
+        });
+    </script>
+    <?php unset($_SESSION['message']); unset($_SESSION['message_code']); unset($_SESSION['message_text']); ?>
+<?php } ?>
+
     </body>
     </html>
