@@ -42,7 +42,8 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-semibold d-block"><?=$_SESSION['data']['nama'];?></span>
-                            <small class="text-muted"><?=$_SESSION['data']['nip'];?> </small>
+                            <small class="text-muted"><?= isset($_SESSION['data']['nip']) && $_SESSION['data']['nip'] ? $_SESSION['data']['nip'] : 'STTELJAM'; ?>
+                            </small>
                           </div>
                         </div>
                       </a>
