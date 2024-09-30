@@ -43,6 +43,15 @@ $(document).ready( function () {
     $('#myTable').DataTable({
       pageLength: 50
     });
+
+    $('#table-pegawai').DataTable({
+    paging: false,       // Disable pagination
+    searching: false,    // Disable search box
+    info: false,         // Disable the info text (e.g. "Showing 1 to 10 of 57 entries")
+    pageLength: 50,      // Set number of rows displayed per page, even though pagination is off
+    ordering: true       // Enable column sorting
+});
+
 } );
 </script>
     <!-- Main JS -->

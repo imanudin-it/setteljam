@@ -66,7 +66,7 @@
             </div>
         </form>
         <div class="table-responsive text-no-wrap mb-3">
-            <table width="100%" class="table table-bordered table-hover">
+            <table width="100%" class="table table-bordered table-hover" id="table-pegawai">
                 <thead align="center">
                     <tr align="center">
                         <th width="10">No</th>
