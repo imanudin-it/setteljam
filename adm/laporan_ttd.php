@@ -1,6 +1,6 @@
 <?php
 // Mulai output buffering
-require_once('./function.php');
+require_once('../function.php');
 if (isset($_GET['kode'])) {
     $kode = $_GET['kode'];
 
@@ -144,7 +144,7 @@ if (isset($_GET['kode'])) {
     $content = ob_get_clean();
 
     // Pastikan library mPDF sudah diinstal sebelum menggunakan kode ini
-    require_once __DIR__ . '/vendor/autoload.php'; // Sesuaikan path dengan letak instalasi mPDF
+    require_once '/vendor/autoload.php'; // Sesuaikan path dengan letak instalasi mPDF
 
     // Buat objek mPDF
     $mpdf = new \Mpdf\Mpdf();
