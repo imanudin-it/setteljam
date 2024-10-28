@@ -1,9 +1,11 @@
 <?php 
  session_start();
- if(!$_SESSION['user']){
-    header('Location: ./login.php');
+// Check if the session is valid and data exists
+if(empty($_SESSION['data'])){
+    http_response_code(500);
+    header('Location: /404/');
     exit();
- }
+}
 // Load the database configuration file 
 include_once 'db-config.php'; 
  
