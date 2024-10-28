@@ -101,7 +101,7 @@ if (isset($_GET['kode'])) {
             <td align="right"> <?=number_format($row['diterima'],'2',',','.');?> </td>
             <?php if ($sisi == 'kiri') {
                 $next = $no + 1;
-                echo '<td rowspan="2" valign="top"> <small> ' . $no . '</small> <img src="' . $row['ttd'] . '" style="width:50px; height:50px;"> </td>
+                echo '<td rowspan="2" valign="top"> <small> ' . $no . '</small> <img src="/pegawai/' . $row['ttd'] . '" style="width:50px; height:50px;"> </td>
                         <td rowspan="2"> ';
                 if ($next <= $total) {
                     echo ' <small> ' . $next . '</small> <img style="float:right" src="' . $results[$no]['ttd'] . '" style="width:50px; height:50px;"> ';
