@@ -115,6 +115,6 @@ if(isset($_POST['importSubmit'])){
 } 
  
 // Redirect to the listing page 
-header("Location: ./upload".$qstring.$pesan1); 
+header("Location: ./adm/upload".$qstring.$pesan1); 
  
 ?>
