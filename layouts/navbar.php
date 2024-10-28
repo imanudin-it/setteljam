@@ -21,7 +21,7 @@
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-3">
-                <span class="badge rounded-pill bg-secondary"><i class="bx bx-calendar"></i> <?php echo date('d-m-Y'); ?> </span>
+                <span class="badge rounded-pill bg-secondary"><a href="./"><i class="bx bx-home"></i> </a> </span>
                 </li>
 
                 <!-- User -->
