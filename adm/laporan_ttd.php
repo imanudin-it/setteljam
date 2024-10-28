@@ -6,7 +6,7 @@ if (isset($_GET['kode'])) {
 
     ob_start();
 
-    require_once('db-config.php');
+    require_once('../db-config.php');
 
     $sql2 = "SELECT a.*, b.tanggal, b.nama as judul FROM ttd_jasa a 
             LEFT JOIN judul b on b.kode_transaksi = a.kode_transaksi 
