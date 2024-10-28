@@ -140,20 +140,20 @@ if (isset($_GET['kode'])) {
 </body>
 </html>
 <?php
-    // // Selesai menangkap output HTML
-    // $content = ob_get_clean();
+    // Selesai menangkap output HTML
+    $content = ob_get_clean();
 
-    // // Pastikan library mPDF sudah diinstal sebelum menggunakan kode ini
-    // require_once __DIR__ . '/vendor/autoload.php'; // Sesuaikan path dengan letak instalasi mPDF
+    // Pastikan library mPDF sudah diinstal sebelum menggunakan kode ini
+    require_once __DIR__ . '/vendor/autoload.php'; // Sesuaikan path dengan letak instalasi mPDF
 
-    // // Buat objek mPDF
-    // $mpdf = new \Mpdf\Mpdf();
+    // Buat objek mPDF
+    $mpdf = new \Mpdf\Mpdf();
 
-    // // Tambahkan HTML yang telah Anda tangkap ke objek mPDF
-    // $mpdf->WriteHTML($content);
+    // Tambahkan HTML yang telah Anda tangkap ke objek mPDF
+    $mpdf->WriteHTML($content);
 
-    // // Outputkan PDF ke browser atau simpan ke file
-    // $mpdf->Output(); // 'D' untuk langsung mengunduh file PDF
+    // Outputkan PDF ke browser atau simpan ke file
+    $mpdf->Output(); // 'D' untuk langsung mengunduh file PDF
 }
 } else {
     header('Location: ./index.php');
