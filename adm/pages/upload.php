@@ -11,7 +11,7 @@
 }
 ?>
             <div class="card mb-4">
-            <form class="row g-3" action="import-data.php" method="post" enctype="multipart/form-data">
+            <form class="row g-3" action="/import-data.php" method="post" enctype="multipart/form-data">
                     <h5 class="card-header mb-3"><i class="bx bx-upload"></i> Upload Berkas :</h5>
                     <div class="card-body mb-0">
                      <div class="row">
