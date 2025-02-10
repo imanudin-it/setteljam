@@ -1,7 +1,6 @@
 
 <?php
 
-use Mpdf\Tag\Header;
 
     $kode = isset($_GET['kode']) ? $_GET['kode'] : '';
      if($kode){ 
@@ -23,12 +22,15 @@ use Mpdf\Tag\Header;
         }else{
           if(isset($_GET['hapus'])){
             $id = $_GET['hapus'];
-            $sql = "DELETE FROM ttd_jasa WHERE kode_transaksi = :kode AND id = :id";
+            $sql = "UPDATE ttd_jasa 
+            SET ttd = NULL
+            WHERE kode_transaksi = :kode AND id = :id";
             $stmt = $pdo->prepare($sql);
 
             $stmt->execute([':kode' => $kode, ':id' => $id],);
 
-            Header('Location: /adm/?link=list&kode='.$kode);
+            echo '<meta http-equiv="refresh" content="0;url=/adm/?link=laporan&kode=' . $kode . '">';
+
           }
         ?>
                 
@@ -87,6 +89,7 @@ use Mpdf\Tag\Header;
                     <th> Jumlah </th>
                     <th> PPh </th>
                     <th> Diterima </th>
+                    <th> Opsi </th>
                 </tr>
                 </thead>
                 <tbody>
@@ -111,7 +114,7 @@ use Mpdf\Tag\Header;
                     <td align="right"> <?=number_format($row['nominal'],'2',',','.');?> </td>
                     <td align="right"> <?=number_format($row['pph'],'2',',','.');?> </td>
                     <td align="right"> <?=number_format($row['diterima'],'2',',','.');?> </td>
-                    <td> <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Ulangi tanda tangan a/n : <?=$row['nama'];?> </small> <div align='right' class='mt-2'><a href='./?link=laporan&kode=<?=$kode;?>&hapus=<?=$row['id'];?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Ulang tanda tangan ini ?" aria-describedby="popover583573"><i class='bx bx-edit'></i> Reset </button></td>
+                    <td> <button type="button" class="btn btn-warning btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Nama : <?=$row['nama'];?> </small> <div align='right' class='mt-2'><a href='./?link=laporan&kode=<?=$kode;?>&hapus=<?=$row['id'];?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Ulang tanda tangan ini ?" aria-describedby="popover583573"><i class='bx bx-edit'></i> Reset </button></td>
                     <?php
                     // Tambahkan nilai ke total
                     $total_nominal += (float)$row['nominal'];
