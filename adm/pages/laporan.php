@@ -26,19 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nik = $_POST['nik'] ?? '';
     $nama = $_POST['nama'] ?? '';
     $jabatan = $_POST['jabatan'] ?? '';
-    $jumlah = str_replace(['.', ','], ['', '.'], $_POST['jumlah'] ?? '0');
+    $nominal = str_replace(['.', ','], ['', '.'], $_POST['nominal'] ?? '0');
     $pph = str_replace(['.', ','], ['', '.'], $_POST['pph'] ?? '0');
     $diterima = str_replace(['.', ','], ['', '.'], $_POST['diterima'] ?? '0');
     
     if (!empty($id) && !empty($nik) && !empty($nama)) {
         try {
-            $sql = "UPDATE ttd_jasa SET nik = :nik, nama = :nama, jabatan = :jabatan, nominal = :jumlah, pph = :pph, diterima = :diterima WHERE id = :id";
+            $sql = "UPDATE ttd_jasa SET nik = :nik, nama = :nama, jabatan = :jabatan, nominal = :nominal, pph = :pph, diterima = :diterima WHERE id = :id";
             $stmt = $pdo->prepare($sql);
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->bindParam(':nik', $nik, PDO::PARAM_STR);
             $stmt->bindParam(':nama', $nama, PDO::PARAM_STR);
             $stmt->bindParam(':jabatan', $jabatan, PDO::PARAM_STR);
-            $stmt->bindParam(':jumlah', $jumlah, PDO::PARAM_STR);
+            $stmt->bindParam(':nominal', $nominal, PDO::PARAM_STR);
             $stmt->bindParam(':pph', $pph, PDO::PARAM_STR);
             $stmt->bindParam(':diterima', $diterima, PDO::PARAM_STR);
             
@@ -87,49 +87,6 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
             echo '<meta http-equiv="refresh" content="0;url=/adm/?link=laporan&kode=' . $kode . '">';
 
           }
-
-          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $id = $_POST['id'] ?? null;
-            $nik = $_POST['nik'] ?? '';
-            $nama = $_POST['nama'] ?? '';
-            $jabatan = $_POST['jabatan'] ?? '';
-            $nominal = str_replace(['.', ','], ['', '.'], $_POST['nominal'] ?? '0');
-            $pph = str_replace(['.', ','], ['', '.'], $_POST['pph'] ?? '0');
-            $diterima = str_replace(['.', ','], ['', '.'], $_POST['diterima'] ?? '0');
-            
-            if (!empty($id) && !empty($nik) && !empty($nama)) {
-                try {
-                    $sql = "UPDATE ttd_jasa SET nik = :nik, nama = :nama, jabatan = :jabatan, nominal = :nominal, pph = :pph, diterima = :diterima WHERE id = :id";
-                    $stmt = $pdo->prepare($sql);
-                    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-                    $stmt->bindParam(':nik', $nik, PDO::PARAM_STR);
-                    $stmt->bindParam(':nama', $nama, PDO::PARAM_STR);
-                    $stmt->bindParam(':jabatan', $jabatan, PDO::PARAM_STR);
-                    $stmt->bindParam(':nominal', $nominal, PDO::PARAM_STR);
-                    $stmt->bindParam(':pph', $pph, PDO::PARAM_STR);
-                    $stmt->bindParam(':diterima', $diterima, PDO::PARAM_STR);
-                    
-                    if ($stmt->execute()) {
-                        $_SESSION['message'] = "Data berhasil diperbarui.";
-                        $_SESSION['message_code'] = "success";
-                    } else {
-                        $_SESSION['message'] = "Gagal memperbarui data.";
-                        $_SESSION['message_code'] = "error";
-                    }
-                } catch (PDOException $e) {
-                    $_SESSION['message'] = "Error: " . $e->getMessage();
-                    $_SESSION['message_code'] = "error";
-                }
-            } else {
-                $_SESSION['message'] = "Harap lengkapi data yang wajib diisi.";
-                $_SESSION['message_code'] = "warning";
-            }
-
-            echo '<meta http-equiv="refresh" content="0;url=/adm/?link=laporan&kode=' . $kode . '">';
-          }
-
-          // Menampilkan pesan dari session jika ada
-
         ?>
                 
             <div class="card bg-secondary text-white text-center p-2 mb-3">
