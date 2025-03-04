@@ -8,6 +8,8 @@
 if($_SESSION['status']!='admin'){
     header('Location: /');
 }
+
+
 ?>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <body>
@@ -28,7 +30,14 @@ if($_SESSION['status']!='admin'){
          <div class="content-wrapper">
             <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
+              
               <?php 
+
+if (isset($_SESSION['message'])) {
+  echo "<div class='alert alert-" . $_SESSION['message_code'] . "' role='alert'>" . $_SESSION['message'] . "</div>";
+  unset($_SESSION['message']);
+  unset($_SESSION['message_code']);
+}
               $akses = $_SESSION['data'];
               $link = isset($_GET['link']) ? $_GET['link'] : '';
               switch($link){

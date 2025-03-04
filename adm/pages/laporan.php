@@ -1,7 +1,6 @@
 
 <?php
 
-
     $kode = isset($_GET['kode']) ? $_GET['kode'] : '';
      if($kode){ 
         $sql = "SELECT * FROM judul WHERE kode_transaksi = :kode";
@@ -20,18 +19,117 @@
             </figure>
          </div>';
         }else{
-          if(isset($_GET['hapus'])){
-            $id = $_GET['hapus'];
-            $sql = "UPDATE ttd_jasa 
-            SET ttd = NULL
-            WHERE kode_transaksi = :kode AND id = :id";
+         
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $id = $_POST['id'] ?? null;
+    $nik = $_POST['nik'] ?? '';
+    $nama = $_POST['nama'] ?? '';
+    $jabatan = $_POST['jabatan'] ?? '';
+    $jumlah = str_replace(['.', ','], ['', '.'], $_POST['jumlah'] ?? '0');
+    $pph = str_replace(['.', ','], ['', '.'], $_POST['pph'] ?? '0');
+    $diterima = str_replace(['.', ','], ['', '.'], $_POST['diterima'] ?? '0');
+    
+    if (!empty($id) && !empty($nik) && !empty($nama)) {
+        try {
+            $sql = "UPDATE ttd_jasa SET nik = :nik, nama = :nama, jabatan = :jabatan, nominal = :jumlah, pph = :pph, diterima = :diterima WHERE id = :id";
             $stmt = $pdo->prepare($sql);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->bindParam(':nik', $nik, PDO::PARAM_STR);
+            $stmt->bindParam(':nama', $nama, PDO::PARAM_STR);
+            $stmt->bindParam(':jabatan', $jabatan, PDO::PARAM_STR);
+            $stmt->bindParam(':jumlah', $jumlah, PDO::PARAM_STR);
+            $stmt->bindParam(':pph', $pph, PDO::PARAM_STR);
+            $stmt->bindParam(':diterima', $diterima, PDO::PARAM_STR);
+            
+            if ($stmt->execute()) {
+                $_SESSION['message'] = "Data berhasil diperbarui.";
+                $_SESSION['message_code'] = "success";
+            } else {
+                $_SESSION['message'] = "Gagal memperbarui data.";
+                $_SESSION['message_code'] = "error";
+            }
+        } catch (PDOException $e) {
+            $_SESSION['message'] = "Error: " . $e->getMessage();
+            $_SESSION['message_code'] = "error";
+        }
+    } else {
+        $_SESSION['message'] = "Harap lengkapi data yang wajib diisi.";
+        $_SESSION['message_code'] = "warning";
+    }
+    
+    echo '<meta http-equiv="refresh" content="0;url=/adm/?link=laporan&kode=' . $kode . '">';
 
-            $stmt->execute([':kode' => $kode, ':id' => $id],);
+}
 
+// Proses hapus tanda tangan
+if (isset($_GET['hapus']) && isset($_GET['kode'])) {
+    $id = $_GET['hapus'];
+    $kode = $_GET['kode'];
+    
+    try {
+        $sql = "UPDATE ttd_jasa SET ttd = NULL WHERE kode_transaksi = :kode AND id = :id";
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':kode', $kode, PDO::PARAM_STR);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        
+        if ($stmt->execute()) {
+            $_SESSION['message'] = "Tanda tangan berhasil dihapus.";
+            $_SESSION['message_code'] = "success";
+        } else {
+            $_SESSION['message'] = "Gagal menghapus tanda tangan.";
+            $_SESSION['message_code'] = "error";
+                }
+            } catch (PDOException $e) {
+                $_SESSION['message'] = "Error: " . $e->getMessage();
+                $_SESSION['message_code'] = "error";
+            }
             echo '<meta http-equiv="refresh" content="0;url=/adm/?link=laporan&kode=' . $kode . '">';
 
           }
+
+          if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $id = $_POST['id'] ?? null;
+            $nik = $_POST['nik'] ?? '';
+            $nama = $_POST['nama'] ?? '';
+            $jabatan = $_POST['jabatan'] ?? '';
+            $nominal = str_replace(['.', ','], ['', '.'], $_POST['nominal'] ?? '0');
+            $pph = str_replace(['.', ','], ['', '.'], $_POST['pph'] ?? '0');
+            $diterima = str_replace(['.', ','], ['', '.'], $_POST['diterima'] ?? '0');
+            
+            if (!empty($id) && !empty($nik) && !empty($nama)) {
+                try {
+                    $sql = "UPDATE ttd_jasa SET nik = :nik, nama = :nama, jabatan = :jabatan, nominal = :nominal, pph = :pph, diterima = :diterima WHERE id = :id";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+                    $stmt->bindParam(':nik', $nik, PDO::PARAM_STR);
+                    $stmt->bindParam(':nama', $nama, PDO::PARAM_STR);
+                    $stmt->bindParam(':jabatan', $jabatan, PDO::PARAM_STR);
+                    $stmt->bindParam(':nominal', $nominal, PDO::PARAM_STR);
+                    $stmt->bindParam(':pph', $pph, PDO::PARAM_STR);
+                    $stmt->bindParam(':diterima', $diterima, PDO::PARAM_STR);
+                    
+                    if ($stmt->execute()) {
+                        $_SESSION['message'] = "Data berhasil diperbarui.";
+                        $_SESSION['message_code'] = "success";
+                    } else {
+                        $_SESSION['message'] = "Gagal memperbarui data.";
+                        $_SESSION['message_code'] = "error";
+                    }
+                } catch (PDOException $e) {
+                    $_SESSION['message'] = "Error: " . $e->getMessage();
+                    $_SESSION['message_code'] = "error";
+                }
+            } else {
+                $_SESSION['message'] = "Harap lengkapi data yang wajib diisi.";
+                $_SESSION['message_code'] = "warning";
+            }
+
+            echo '<meta http-equiv="refresh" content="0;url=/adm/?link=laporan&kode=' . $kode . '">';
+          }
+
+          // Menampilkan pesan dari session jika ada
+
         ?>
                 
             <div class="card bg-secondary text-white text-center p-2 mb-3">
@@ -114,14 +212,69 @@
                     <td align="right"> <?=number_format($row['nominal'],'2',',','.');?> </td>
                     <td align="right"> <?=number_format($row['pph'],'2',',','.');?> </td>
                     <td align="right"> <?=number_format($row['diterima'],'2',',','.');?> </td>
-                    <td> <button type="button" class="btn btn-warning btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Nama : <?=$row['nama'];?> </small> <div align='right' class='mt-2'><a href='./?link=laporan&kode=<?=$kode;?>&hapus=<?=$row['id'];?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Ulang tanda tangan ini ?" aria-describedby="popover583573"><i class='bx bx-edit'></i> Reset </button></td>
+                    <td align="center"> 
+                      
+                    <button data-bs-toggle="modal" data-bs-target="#data<?=$row['id'];?>" class="btn btn-primary btn-sm"><i class='bx bx-edit'></i> Edit </button>
+                    <button type="button" class="btn btn-warning btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Nama : <?=$row['nama'];?> </small> <div align='right' class='mt-2'><a href='./?link=laporan&kode=<?=$kode;?>&hapus=<?=$row['id'];?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Ulang tanda tangan ini ?" aria-describedby="popover583573"><i class='bx bx-refresh'></i> Reset </button></td>
                     <?php
                     // Tambahkan nilai ke total
                     $total_nominal += (float)$row['nominal'];
                     $total_pph += (float)$row['pph'];
                     $total_diterima += (float)$row['diterima'];
                     ?>
-        
+        <div class="modal fade" id="data<?=$row['id'];?>" tabindex="-1" style="display: none;" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel1"> Edit : <i><?=$row['nama'];?></i></h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <form action="" method="POST"> 
+                    <input type="hidden" name="id" value="<?=$row['id'];?>">
+                  <div class="row mb-3">
+                    <div class="col mb-6">
+                      <label for="nameBasic" class="form-label">NIP / NRPTT </label>
+                      <input type="text" name="nik" id="nameBasic" class="form-control" placeholder="NIP" value="<?=$row['nik'];?>">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col mb-6">
+                      <label for="nameBasic" class="form-label">Nama</label>
+                      <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name" name="nama" value="<?=$row['nama'];?>">
+                    </div>
+                  </div>
+                  
+                  <div class="row mb-3">
+                    <div class="col mb-6">
+                      <label for="nameBasic" class="form-label">Jabatan</label>
+                      <input type="text" id="nameBasic" class="form-control" placeholder="Enter Name" name="jabatan" value="<?=$row['jabatan'];?>">
+                    </div>
+                  </div>
+                  <div class="row g-6">
+                    <div class="col mb-3">
+                      <label for="emailBasic" class="form-label">Jumlah</label>
+                      <input type="text" class="form-control" name="nominal" value="<?=number_format($row['nominal'], 2, ',', '.');?>">
+                    </div>
+                    <div class="col mb-3">
+                      <label for="dobBasic" class="form-label">PPh</label>
+                      <input type="text" class="form-control" name="pph" value="<?=number_format($row['pph'], 2, ',', '.');?>">
+                    </div>
+                  </div>
+                  <div class="row mb-3">
+                    <div class="col mb-6">
+                      <label for="nameBasic" class="form-label">Diterima</label>
+                      <input type="text" class="form-control" placeholder="Enter Name" name="diterima" value="<?=number_format($row['diterima'], 2, ',', '.');?>">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+              </div>
+            </div>
+          </div>
                   <?php
                      endforeach;
                      ?>
@@ -143,6 +296,9 @@
                   </tr>
                   </tfoot>
                 </table>
+
+                
+          
             </div>
                 </div>
                 
