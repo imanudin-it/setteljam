@@ -275,6 +275,7 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
                 </div>
               </div>
             </div>
+        </form>
           </div>
                   <?php
                      endforeach;
