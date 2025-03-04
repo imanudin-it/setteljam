@@ -33,11 +33,6 @@ if($_SESSION['status']!='admin'){
               
               <?php 
 
-if (isset($_SESSION['message'])) {
-  echo "<div class='alert alert-" . $_SESSION['message_code'] . "' role='alert'>" . $_SESSION['message'] . "</div>";
-  unset($_SESSION['message']);
-  unset($_SESSION['message_code']);
-}
               $akses = $_SESSION['data'];
               $link = isset($_GET['link']) ? $_GET['link'] : '';
               switch($link){

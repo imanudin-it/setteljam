@@ -223,6 +223,7 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
                     $total_diterima += (float)$row['diterima'];
                     ?>
         <div class="modal fade" id="data<?=$row['id'];?>" tabindex="-1" style="display: none;" aria-hidden="true">
+        <form action="" method="POST"> 
             <div class="modal-dialog" role="document">
               <div class="modal-content">
                 <div class="modal-header">
@@ -230,7 +231,7 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form action="" method="POST"> 
+                 
                     <input type="hidden" name="id" value="<?=$row['id'];?>">
                   <div class="row mb-3">
                     <div class="col mb-6">
