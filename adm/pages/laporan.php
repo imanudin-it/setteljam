@@ -115,8 +115,10 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
                         <div class="card-body">
                         <!-- <div class="btn-group pull-right mb-3"> <button class="btn btn-info btn-sm" onclick="printDiv('laporan')"/> <i class='bx bx-printer' ></i> | PRINT </button> <button class="btn btn-success btn-sm" id="excel"> <i class='bx bx-table' ></i> | EXCEL </button> </div>  -->
                         <button onclick="javascript:window.history.back()" class="btn btn-warning btn-sm mb-3"> <i class="bx bx-arrow-back"></i> &nbsp; </button>
-                        <a href="/adm/laporan_ttd.php?kode=<?=$kode;?>" target="_blank" class="btn btn-success btn-sm mb-3"  id="pdf"> <i class='bx bxs-file-pdf' ></i> Download PDF </a> 
-                        <div style="float:right"> <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Berkas dan tanda tangan akan dihapus </small> <div align='right' class='mt-2'><a href='./?link=list&hapus=<?=$kode;?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Yakin akan dihapus ?" aria-describedby="popover583573"><i class='bx bx-trash'></i> Hapus </button>
+                        <a href="/adm/laporan_ttd.php?kode=<?=$kode;?>" target="_blank" class="btn btn-success btn-sm mb-3"  id="pdf"> <i class='bx bxs-file-pdf' ></i> PDF </a> 
+                        <div style="float:right"> 
+                           <button data-bs-toggle="modal" data-bs-target="#importupdate" class="btn btn-success btn-sm"><i class='bx bx-edit'></i> Update </button>
+                           <button type="button" class="btn btn-danger btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Berkas dan tanda tangan akan dihapus </small> <div align='right' class='mt-2'><a href='./?link=list&hapus=<?=$kode;?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Yakin akan dihapus ?" aria-describedby="popover583573"><i class='bx bx-trash'></i> Hapus </button>
                         </div>
             <style>
            		table {
@@ -142,7 +144,7 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
                     <th> Nama </th>
                     <th> Jabatan </th>
                     <th> Jumlah </th>
-                    <th> PPh </th>
+                    <th> <?php if(strtok($_GET['kode'], '-') =='GAJI') echo'BPJS 1%'; else echo 'PPH'; ?> </th>
                     <th> Diterima </th>
                     <th> Opsi </th>
                 </tr>
@@ -167,12 +169,12 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
                     <td> <?=$row['nama'];?> </td>
                     <td> <?=$row['jabatan'];?> </td>
                     <td align="right"> <?=number_format($row['nominal'],'2',',','.');?> </td>
-                    <td align="right"> <?=number_format($row['pph'],'2',',','.');?> </td>
+                    <td align="right"> <?=number_format($row['pph'] ?? 0, 2, ',', '.');?> </td>
                     <td align="right"> <?=number_format($row['diterima'],'2',',','.');?> </td>
                     <td align="center"> 
                       
-                    <button data-bs-toggle="modal" data-bs-target="#data<?=$row['id'];?>" class="btn btn-primary btn-sm"><i class='bx bx-edit'></i> Edit </button>
-                    <button type="button" class="btn btn-warning btn-sm"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Nama : <?=$row['nama'];?> </small> <div align='right' class='mt-2'><a href='./?link=laporan&kode=<?=$kode;?>&hapus=<?=$row['id'];?>' type='button' class='btn btn-sm btn-primary'>Ya</a></div>" title="" data-bs-original-title="Ulang tanda tangan ini ?" aria-describedby="popover583573"><i class='bx bx-refresh'></i> Reset </button></td>
+                    <button data-bs-toggle="modal" data-bs-target="#data<?=$row['id'];?>" class="btn btn-primary btn-xs"><i class='bx bx-edit'></i> Edit </button>
+                    <button type="button" class="btn btn-warning btn-xs"  data-bs-toggle="popover" data-bs-offset="0,14" data-bs-placement="top" data-bs-html="true" data-bs-content="<small>Nama : <?=$row['nama'];?> </small> <div align='right' class='mt-2'><a href='./?link=laporan&kode=<?=$kode;?>&hapus=<?=$row['id'];?>' type='button' class='btn btn-xs btn-primary'>Ya</a></div>" title="" data-bs-original-title="Ulang tanda tangan ini ?" aria-describedby="popover583573"><i class='bx bx-refresh'></i> Reset </button></td>
                     <?php
                     // Tambahkan nilai ke total
                     $total_nominal += (float)$row['nominal'];
@@ -216,7 +218,7 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
                     </div>
                     <div class="col mb-3">
                       <label for="dobBasic" class="form-label">PPh</label>
-                      <input type="text" class="form-control" name="pph" value="<?=number_format($row['pph'], 2, ',', '.');?>">
+                      <input type="text" class="form-control" name="pph" value="<?=number_format($row['pph'] ?? 0, 2, ',', '.');?>">
                     </div>
                   </div>
                   <div class="row mb-3">
@@ -277,4 +279,31 @@ if (isset($_GET['hapus']) && isset($_GET['kode'])) {
       </div>
     </div>
 <?php } ?>
-	
+	<div class="modal fade" id="importupdate" tabindex="-1" style="display: none;" aria-hidden="true">
+        <form action="/import-update.php" method="POST" enctype="multipart/form-data"> 
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel1"> Update Data : </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                 
+                    <input type="hidden" name="kode_transaksi" value="<?=$row['kode_transaksi'];?>">
+                 <div class="input-group">
+                        <input type="file" name="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload"required>
+                      </div>
+                      <div id="floatingInputHelp" class="form-text">
+                          <i>(Upload berkas Excel)</i>
+                        </div>
+                       
+                  
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Tutup</button>
+                  <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+              </div>
+            </div>
+        </form>
+          </div>

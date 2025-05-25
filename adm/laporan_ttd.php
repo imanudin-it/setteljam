@@ -104,7 +104,7 @@ if (isset($_GET['kode'])) {
             <td> <?= $row['nama']; ?> </td>
             <td> <?= $row['jabatan']; ?> </td>
             <td valign="middle" align="right"> <?= number_format($row['nominal'], '2', ',', '.'); ?> </td>
-            <td align="right"> <?=number_format($row['pph'],'2',',','.');?> </td>
+            <td align="right"> <?=number_format($row['pph'] ?? 0, 2, ',', '.');?> </td>
             <td align="right"> <?=number_format($row['diterima'],'2',',','.');?> </td>
             <?php if ($sisi == 'kiri') {
                 $next = $no + 1;
@@ -132,7 +132,7 @@ if (isset($_GET['kode'])) {
                   <tr>
                     <td colspan="3"> Total </td>
                     <td align="right"><strong><?= number_format($total_nominal, 2, ',', '.'); ?></strong></td>
-                    <td align="right"><strong><?= number_format($total_pph, 2, ',', '.'); ?></strong></td>
+                    <td align="right"><strong><?= number_format($total_pph ?? 0, 2, ',', '.'); ?></strong></td>
                     <td align="right"><strong><?= number_format($total_diterima, 2, ',', '.'); ?></strong></td>
                   </tr> 
                   
