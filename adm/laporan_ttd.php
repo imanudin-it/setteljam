@@ -77,7 +77,7 @@ if (isset($_GET['kode'])) {
         <th> Nama </th>
         <th> Jabatan </th>
         <th> Jumlah (Rp.) </th>
-        <th> PPh (Rp.) </th>
+        <th> <?php if(strtok($_GET['kode'], '-') =='GAJI') echo'BPJS 1%'; else echo 'PPh (Rp.)'; ?> </th>
         <th> Diterima (Rp.) </th>
         <th colspan="2"> Tanda Tangan</th>
     </tr>

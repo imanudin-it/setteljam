@@ -51,7 +51,7 @@
                                 <table class="table table-bordered table-hover">
                                     <tbody>
                                         <tr class="table-warning"> <td width="30%"> Jumlah </td><td> Rp. <?=number_format($result['nominal'], 0,',','.');?> </td> </tr>
-                                        <tr class="table-danger"> <td> PPh </td><td> Rp. <?=number_format($result['pph'], 0,',','.');?> </td> </tr>
+                                        <tr class="table-danger"> <td> <?php if(strtok($_GET['kode'], '-') =='GAJI') echo'BPJS 1%'; else echo 'PPH'; ?> </td><td> Rp. <?=number_format($result['pph'], 0,',','.');?> </td> </tr>
                                         <tr class="table-success">  <td> Diterima </td><td> Rp. <?=number_format($result['diterima'], 0,',','.');?> </td> </tr>
                                     </tbody>
                                 </table>
